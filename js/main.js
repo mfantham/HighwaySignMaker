@@ -185,6 +185,7 @@ const app = (function() {
 		panel.sign.shieldPosition = form["shieldsPosition"].value;
 		panel.sign.guideArrow = form["guideArrow"].value;
 		panel.sign.guideArrowLanes = form["guideArrowLanes"].value;
+		panel.sign.guideArrowGap = form["guideArrowGap"].value;
 		panel.sign.otherSymbol = form["otherSymbol"].value;
 		panel.sign.oSNum = form["oSNum"].value;
 		panel.sign.actionMessage = form["actionMessage"].value;
@@ -294,6 +295,9 @@ const app = (function() {
 
 		const guideArrowLanesElmt = document.getElementById("guideArrowLanes");
 		guideArrowLanesElmt.value = panel.sign.guideArrowLanes;
+
+		const guideArrowGapElmt = document.getElementById("guideArrowGap");
+		guideArrowGapElmt.value = panel.sign.guideArrowGap;
 
 		const otherSymbolSelectElement = document.getElementById("otherSymbol");
 		for (const option of otherSymbolSelectElement.options) {
@@ -472,6 +476,7 @@ const app = (function() {
 
 			const arrowContElmt = document.createElement("div");
 			arrowContElmt.className = `arrowContainer`;
+			arrowContElmt.style.gap = `${panel.sign.guideArrowGap}rem`;
 			guideArrowsElmt.appendChild(arrowContElmt);
 
 			panelContainerElmt.appendChild(panelElmt);

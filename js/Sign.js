@@ -8,6 +8,7 @@ class Sign {
 	 * @param {boolean} [opt.shieldBacks=false] - Whether or not shields should be displayed with backings.
 	 * @param {string} [opt.guideArrow] - Which guide arrow to display on the sign, if any.
 	 * @param {number} [opt.guideArrowLanes=1] - Number of lanes actoss to display guide arrows.
+	 * @param {number} [opt.guideArrowGap=1] - Gap between guide arrows in rem.
 	 * @param {string} [opt.otherSymbols] - Other symbols on the bottom of signs (like Quebec style exit markers)
 	 * @param {string} [opt.oSNum=""] - Number to place on otherSymbol
 	 * @param {string} [opt.actionMessage=""] - Custom subtext to display on the sign.
@@ -19,6 +20,7 @@ class Sign {
 			shieldBacks = false,
 			guideArrow,
 			guideArrowLanes = 1,
+			guideArrowGap = 1,
 			otherSymbol,
 			oSNum = "",
 			actionMessage = "",
@@ -48,6 +50,7 @@ class Sign {
 		} else {
 			this.guideArrowLanes = 0;
 		}
+		this.guideArrowGap = (guideArrowGap >= 0 && guideArrowGap <= 20) ? Number(guideArrowGap) : 1;
 		this.oSNum = oSNum;
 		this.actionMessage = actionMessage;
 		this.shields = shields;

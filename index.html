@@ -97,6 +97,7 @@
 				<select id="guideArrow" onChange="app.readForm();">
 				</select>
 				<input type="number" id="guideArrowLanes" name="guideArrowLanes" min=1 max=6 onBlur="app.readForm();" />
+				<input type="number" id="guideArrowGap" name="guideArrowGap" min=0 max=20 step=0.5 placeholder="Gap (rem)" title="Arrow gap (rem)" onBlur="app.readForm();" />
 				<br />
 				<label for="otherSymbol">Other Bottom Symbols:</label>
 				<select id="otherSymbol" onChange="app.readForm();">

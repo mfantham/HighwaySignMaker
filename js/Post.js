@@ -44,6 +44,7 @@ class Post {
 			sheildBacks : existingPanel.sign.sheildBacks,
 			guideArrow : existingPanel.sign.guideArrow,
 			guideArrowLanes : existingPanel.sign.guideArrowLanes,
+			guideArrowGap : existingPanel.sign.guideArrowGap,
 			actionMessage : existingPanel.sign.actionMessage,
 			shields : newShields
 		});
