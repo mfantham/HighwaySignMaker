@@ -7,6 +7,9 @@
 #postContainer.polePositionOverhead .post {
 	visibility: visible;
 }
+#postContainer.polePositionNone .post {
+	visibility: hidden;
+}
 #postContainer.polePositionLeft .post:last-child,
 #postContainer.polePositionRight .post:first-child,
 #postContainer.polePositionRural .post,

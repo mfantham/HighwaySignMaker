@@ -96,5 +96,6 @@ Post.prototype.polePositions = [
 	"Right",
 	"Overhead",
 	"Rural",
-	"Center"
+	"Center",
+	"None"
 ];
