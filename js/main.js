@@ -25,6 +25,12 @@ const app = (function() {
 			lib.appendOption(cornerTypeSelectElmt, corner, {selected : (corner == "Round")});
 		}
 
+		// Populate aspect ratio options
+		const aspectRatioSelectElmt = document.getElementById("panelAspectRatio");
+		for (const ratio of Panel.prototype.aspectRatios) {
+			lib.appendOption(aspectRatioSelectElmt, ratio, {selected : (ratio == "Auto")});
+		}
+
 		// Populate exit tab position options
 		const exitTabPositionSelectElmt = document.getElementById("exitTabPosition");
 		for (const position of ExitTab.prototype.positions) {
@@ -169,6 +175,7 @@ const app = (function() {
 		// Exit Tab
 		panel.color = form["panelColor"].value;
 		panel.corner = form["panelCorner"].value;
+		panel.aspectRatio = form["panelAspectRatio"].value;
 		panel.exitTab.number = form["exitNumber"].value;
 		panel.exitTab.width = form["exitTabWidth"].value;
 		panel.exitTab.position = form["exitTabPosition"].value;
@@ -229,6 +236,14 @@ const app = (function() {
 		const panelCornerSelectElmt = document.getElementById("panelCorner");
 		for (const option of panelCornerSelectElmt.options) {
 			if (option.value == panel.corner) {
+				option.selected = true;
+				break;
+			}
+		}
+
+		const panelAspectRatioSelectElmt = document.getElementById("panelAspectRatio");
+		for (const option of panelAspectRatioSelectElmt.options) {
+			if (option.value == panel.aspectRatio) {
 				option.selected = true;
 				break;
 			}
@@ -406,6 +421,10 @@ const app = (function() {
 
 			const signCont = document.createElement("div");
 			signCont.className = `signContainer exit-${panel.exitTab.width.toLowerCase()} exit-${panel.exitTab.position.toLowerCase()}`;
+			if (panel.aspectRatio && panel.aspectRatio !== "Auto") {
+				const [w, h] = panel.aspectRatio.split(":");
+				signCont.style.aspectRatio = `${w} / ${h}`;
+			}
 			panelElmt.appendChild(signCont);
 			const signElmt = document.createElement("div");
 			signElmt.className = `sign exit-${panel.exitTab.width.toLowerCase()} exit-${panel.exitTab.position.toLowerCase()}`;
