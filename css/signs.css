@@ -7,6 +7,9 @@
 #postContainer.polePositionOverhead .post {
 	visibility: visible;
 }
+#postContainer.polePositionNone .post {
+	visibility: hidden;
+}
 #postContainer.polePositionLeft .post:last-child,
 #postContainer.polePositionRight .post:first-child,
 #postContainer.polePositionRural .post,
@@ -504,12 +507,20 @@
 	line-height: 0; /* Makes space text (arrow) takes up minimal */
 
 	display: inline-block;
-	margin: -0.5rem 0.05rem 0.05rem 5rem;
+	margin: -0.5rem 0.05rem 0.05rem 0.05rem;
 	padding: 0 0.1rem 0 0.05rem;
+}
+
+.imgArrow {
+	height: 3.5rem;
+	width: auto;
+	vertical-align: middle;
 }
 
 .arrowContainer {
 	display: inline-flex;
+	justify-content: space-evenly;
+	align-items: center;
 }
 .centerText .arrow {
 	margin-right: .5rem;

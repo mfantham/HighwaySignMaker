@@ -44,6 +44,7 @@ class Post {
 			sheildBacks : existingPanel.sign.sheildBacks,
 			guideArrow : existingPanel.sign.guideArrow,
 			guideArrowLanes : existingPanel.sign.guideArrowLanes,
+			guideArrowGap : existingPanel.sign.guideArrowGap,
 			actionMessage : existingPanel.sign.actionMessage,
 			shields : newShields
 		});
@@ -96,5 +97,6 @@ Post.prototype.polePositions = [
 	"Right",
 	"Overhead",
 	"Rural",
-	"Center"
+	"Center",
+	"None"
 ];

@@ -25,6 +25,12 @@ const app = (function() {
 			lib.appendOption(cornerTypeSelectElmt, corner, {selected : (corner == "Round")});
 		}
 
+		// Populate aspect ratio options
+		const aspectRatioSelectElmt = document.getElementById("panelAspectRatio");
+		for (const ratio of Panel.prototype.aspectRatios) {
+			lib.appendOption(aspectRatioSelectElmt, ratio, {selected : (ratio == "Auto")});
+		}
+
 		// Populate exit tab position options
 		const exitTabPositionSelectElmt = document.getElementById("exitTabPosition");
 		for (const position of ExitTab.prototype.positions) {
@@ -169,6 +175,7 @@ const app = (function() {
 		// Exit Tab
 		panel.color = form["panelColor"].value;
 		panel.corner = form["panelCorner"].value;
+		panel.aspectRatio = form["panelAspectRatio"].value;
 		panel.exitTab.number = form["exitNumber"].value;
 		panel.exitTab.width = form["exitTabWidth"].value;
 		panel.exitTab.position = form["exitTabPosition"].value;
@@ -178,6 +185,7 @@ const app = (function() {
 		panel.sign.shieldPosition = form["shieldsPosition"].value;
 		panel.sign.guideArrow = form["guideArrow"].value;
 		panel.sign.guideArrowLanes = form["guideArrowLanes"].value;
+		panel.sign.guideArrowGap = form["guideArrowGap"].value;
 		panel.sign.otherSymbol = form["otherSymbol"].value;
 		panel.sign.oSNum = form["oSNum"].value;
 		panel.sign.actionMessage = form["actionMessage"].value;
@@ -234,6 +242,14 @@ const app = (function() {
 			}
 		}
 
+		const panelAspectRatioSelectElmt = document.getElementById("panelAspectRatio");
+		for (const option of panelAspectRatioSelectElmt.options) {
+			if (option.value == panel.aspectRatio) {
+				option.selected = true;
+				break;
+			}
+		}
+
 		const exitNumberElmt = document.getElementById("exitNumber");
 		exitNumberElmt.value = panel.exitTab.number;
 
@@ -279,6 +295,9 @@ const app = (function() {
 
 		const guideArrowLanesElmt = document.getElementById("guideArrowLanes");
 		guideArrowLanesElmt.value = panel.sign.guideArrowLanes;
+
+		const guideArrowGapElmt = document.getElementById("guideArrowGap");
+		guideArrowGapElmt.value = panel.sign.guideArrowGap;
 
 		const otherSymbolSelectElement = document.getElementById("otherSymbol");
 		for (const option of otherSymbolSelectElement.options) {
@@ -406,6 +425,10 @@ const app = (function() {
 
 			const signCont = document.createElement("div");
 			signCont.className = `signContainer exit-${panel.exitTab.width.toLowerCase()} exit-${panel.exitTab.position.toLowerCase()}`;
+			if (panel.aspectRatio && panel.aspectRatio !== "Auto") {
+				const [w, h] = panel.aspectRatio.split(":");
+				signCont.style.aspectRatio = `${w} / ${h}`;
+			}
 			panelElmt.appendChild(signCont);
 			const signElmt = document.createElement("div");
 			signElmt.className = `sign exit-${panel.exitTab.width.toLowerCase()} exit-${panel.exitTab.position.toLowerCase()}`;
@@ -453,6 +476,7 @@ const app = (function() {
 
 			const arrowContElmt = document.createElement("div");
 			arrowContElmt.className = `arrowContainer`;
+			arrowContElmt.style.gap = `${panel.sign.guideArrowGap}rem`;
 			guideArrowsElmt.appendChild(arrowContElmt);
 
 			panelContainerElmt.appendChild(panelElmt);
@@ -721,10 +745,17 @@ const app = (function() {
 						const arrowElmt = document.createElement("span");
 						arrowElmt.className = "arrow";
 						let arrowChoice = panel.sign.guideArrow;
-						if (panel.sign.guideArrow.includes("/Up")) {
-							arrowElmt.className += " rotate180";
+						if (panel.sign.guideArrow == "Right/Up Arrow") {
+							const imgElmt = document.createElement("img");
+							imgElmt.src = "img/arrows/B-1.png";
+							imgElmt.className = "imgArrow";
+							arrowElmt.appendChild(imgElmt);
+						} else {
+							if (panel.sign.guideArrow.includes("/Up")) {
+								arrowElmt.className += " rotate180";
+							}
+							arrowElmt.appendChild(document.createTextNode(lib.specialCharacters[arrowChoice]));
 						}
-						arrowElmt.appendChild(document.createTextNode(lib.specialCharacters[arrowChoice]));
 						if (arrowIndex %2 == 0) {
 							arrowContElmt.insertBefore(arrowElmt, arrowContElmt.childNodes[0]);
 						}
