@@ -740,10 +740,17 @@ const app = (function() {
 						const arrowElmt = document.createElement("span");
 						arrowElmt.className = "arrow";
 						let arrowChoice = panel.sign.guideArrow;
-						if (panel.sign.guideArrow.includes("/Up")) {
-							arrowElmt.className += " rotate180";
+						if (panel.sign.guideArrow == "Right/Up Arrow") {
+							const imgElmt = document.createElement("img");
+							imgElmt.src = "img/arrows/B-1.png";
+							imgElmt.className = "imgArrow";
+							arrowElmt.appendChild(imgElmt);
+						} else {
+							if (panel.sign.guideArrow.includes("/Up")) {
+								arrowElmt.className += " rotate180";
+							}
+							arrowElmt.appendChild(document.createTextNode(lib.specialCharacters[arrowChoice]));
 						}
-						arrowElmt.appendChild(document.createTextNode(lib.specialCharacters[arrowChoice]));
 						if (arrowIndex %2 == 0) {
 							arrowContElmt.insertBefore(arrowElmt, arrowContElmt.childNodes[0]);
 						}

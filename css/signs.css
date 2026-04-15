@@ -511,6 +511,12 @@
 	padding: 0 0.1rem 0 0.05rem;
 }
 
+.imgArrow {
+	height: 3.5rem;
+	width: auto;
+	vertical-align: middle;
+}
+
 .arrowContainer {
 	display: inline-flex;
 }
